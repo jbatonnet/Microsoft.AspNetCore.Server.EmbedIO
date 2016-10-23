@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Hosting.Server;
+﻿using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.AspNetCore.Server.EmbedIO;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Microsoft.AspNetCore.Server.EmbedIO
+namespace Microsoft.AspNetCore.Hosting
 {
     public static class WebHostBuilderExtensions
     {

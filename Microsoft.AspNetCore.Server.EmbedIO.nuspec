@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package>
+    <metadata>
+        <id>Microsoft.AspNetCore.Server.EmbedIO</id>
+        <version>$version$</version>
+        <authors>Julien Batonnet</authors>
+        <description>EmbedIO web server support for ASP.NET Core</description>
+        <tags>AspNetCore EmbedIO</tags>
+        <dependencies>
+            <dependency id="EmbedIO" version="1.1.0" />
+            <dependency id="Microsoft.AspNetCore.Hosting" version="1.0.0" />
+            <dependency id="Microsoft.Net.Http.Headers" version="1.0.0" />
+        </dependencies>
+    </metadata>
+</package>

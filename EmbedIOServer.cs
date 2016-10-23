@@ -37,9 +37,9 @@ namespace Microsoft.AspNetCore.Server.EmbedIO
             webServer = new WebServer();
             webServer.RegisterModule(aspNetModule);
 
-#if DEBUG
+/*#if DEBUG
             webServer.UrlPrefixes.Add("http://127.0.0.1:5000/");
-#endif
+#endif*/
 
             webServer.UrlPrefixes.Remove("http://*/");
             foreach (string address in serverAddresses.Addresses)
@@ -48,7 +48,7 @@ namespace Microsoft.AspNetCore.Server.EmbedIO
             // Start listener
             webServer.RunAsync();
 
-#if DEBUG
+/*#if DEBUG
             Task.Run(async () =>
             {
                 await Task.Delay(1000);
@@ -56,7 +56,7 @@ namespace Microsoft.AspNetCore.Server.EmbedIO
                 using (HttpClient httpClient = new HttpClient())
                     await httpClient.GetAsync("http://127.0.0.1:5000/");
             });
-#endif
+#endif*/
         }
 
         public void Dispose()
