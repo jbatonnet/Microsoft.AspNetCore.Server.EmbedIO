@@ -10,7 +10,6 @@ namespace Microsoft.AspNetCore.Hosting
         {
             return hostBuilder.ConfigureServices(services =>
             {
-                //ServiceCollectionServiceExtensions.AddTransient<IConfigureOptions<WebListenerOptions>, WebListenerOptionsSetup>(services);
                 ServiceCollectionServiceExtensions.AddSingleton<IServer, EmbedIOServer>(services);
             });
         }

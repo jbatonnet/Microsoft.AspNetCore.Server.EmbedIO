@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,21 +19,29 @@ namespace Microsoft.AspNetCore.Server.EmbedIO
         {
             AddHandler(ModuleMap.AnyPath, HttpVerbs.Any, (server, context) =>
             {
-                FeatureContext featureContext = new FeatureContext(context);
+                try
+                {
+                    FeatureContext featureContext = new FeatureContext(context);
 
-                object applicationContext = application.CreateContext(featureContext.Features);
+                    object applicationContext = application.CreateContext(featureContext.Features);
 
-                application.ProcessRequestAsync(applicationContext).Wait();
-                
-                featureContext.OnStart().Wait();
+                    application.ProcessRequestAsync(applicationContext).Wait();
 
-                //context.Dispose();
-                application.DisposeContext(applicationContext, null);
+                    featureContext.OnStart().Wait();
 
-                featureContext.OnCompleted().Wait();
+                    //context.Dispose();
+                    application.DisposeContext(applicationContext, null);
 
+                    featureContext.OnCompleted().Wait();
 
+                }
+                catch (Exception e)
+                {
+                    context.Response.StatusCode = 500;
 
+                    using (StreamWriter writer = new StreamWriter(context.Response.OutputStream))
+                        writer.Write(e.ToString());
+                }
 
                 return true;
             });

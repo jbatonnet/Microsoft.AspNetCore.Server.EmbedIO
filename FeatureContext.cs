@@ -43,6 +43,7 @@ namespace Microsoft.AspNetCore.Server.EmbedIO
         #region IHttpRequestFeature
 
         private Stream requestBody;
+        private string requestPath;
         private IHeaderDictionary requestHeaders;
 
         Stream IHttpRequestFeature.Body
@@ -85,11 +86,11 @@ namespace Microsoft.AspNetCore.Server.EmbedIO
         {
             get
             {
-                return Context.Request.Url.AbsolutePath;
+                return requestPath;
             }
             set
             {
-                throw new NotSupportedException();
+                requestPath = value;
             }
         }
         string IHttpRequestFeature.PathBase
@@ -343,9 +344,9 @@ namespace Microsoft.AspNetCore.Server.EmbedIO
             Features = new FeatureCollection(this);
 
             requestBody = context.Request.InputStream;
-            responseBody = context.Response.OutputStream;
+            requestPath = Context.Request.Url.AbsolutePath;
 
-            //this._authHandler = new AuthenticationHandler(context);
+            responseBody = context.Response.OutputStream;
         }
 
         internal async Task OnStart()
